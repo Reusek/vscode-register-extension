@@ -1,0 +1,97 @@
+:root {
+    --reg-bg: #69696991;
+    --reg-outline: #5e060691;
+}
+
+/* html {
+    background-color: black;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+} */
+
+body {
+    /* background-color: gray; */
+    /* max-width: 300px; */
+}
+
+.container {
+
+}
+
+.reg {
+    /*  background-color: var(--reg-bg); */
+}
+
+.fill {
+    width: 100%;
+}
+
+.frame {
+    position: relative;
+    height: 35px;
+    width: 100%;
+    background-color: var(--reg-bg);
+     /* outline: 2px solid var(--reg-outline); */
+    /* border-style: solid;
+    border-width: 2px;
+    border-color: var(--reg-outline); */
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.reg-name {
+    position: relative;
+    /* width: 150px; */
+    flex: 0 0 50px;
+    height: 35px;
+    opacity: 60%;
+    margin-right: 5px;
+}
+
+.reg-name-align {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.split {
+    /* width: 250px; */
+    display: flex;
+    flex-direction: row;
+}
+
+#reg-eax {
+    --reg-bg: #bb3d3d91;
+    --reg-outline: #5e060691;
+}
+
+/* #reg-ecx {
+    --reg-bg: #bdc00691;
+    --reg-outline: #61630091;
+}
+
+#reg-edx {
+    --reg-bg: #0056a791;
+    --reg-outline: #003e7791;
+}
+
+#reg-ebx {
+    --reg-bg: #1d972e91;
+    --reg-outline: #16702291;
+}
+
+#reg-esp {
+    --reg-bg: #ba1cc991;
+    --reg-outline: #87189191;
+}
+
+#reg-ebp {
+    --reg-bg: #ba1cc991;
+    --reg-outline: #87189191;
+} */

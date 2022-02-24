@@ -1,0 +1,55 @@
+.value-box {
+    position: relative;
+    @apply bg-red-100;
+    @apply select-none;
+
+    .value {
+        @apply p-1 text-center;
+        @apply border-2 border-transparent;
+        // @apply border-b-red-200;
+        @apply cursor-pointer;
+    }
+
+    .value.opened {
+        @apply bg-red-300;
+        // @apply border-red-400;
+        // @apply border-2  border-red-400;
+    }
+
+    .value:hover {
+        @apply bg-red-300;
+        // @apply border-red-400;
+        // @apply border-2  border-red-400;
+    }
+
+    .select {
+        // display: flex;
+        @apply bg-red-100;
+        @apply border-red-300;
+        @apply border-2 border-t-0;
+
+        top: 100%;
+        left: 0;
+        right: 0;
+        position: absolute;
+        flex-direction: column;
+
+        @apply z-10;
+
+        .repr {
+            @apply cursor-pointer;
+            @apply p-1 text-center;
+            // @apply border-2 border-transparent;
+        }
+
+        .repr:hover {
+            @apply bg-red-200;
+            @apply border-red-300;
+            // @apply border-2  border-red-400;
+        }
+    }
+
+    .select.closed {
+        @apply hidden;
+    }
+}
