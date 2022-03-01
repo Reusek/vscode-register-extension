@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import "./valueBox.scss";
 
+import { Register } from "../utils/register";
+
 enum ERedix {
     HEX,
     BIN,
-    DEC,
+    INT,
+    UINT,
+    FLOAT,
 }
 
 const toRedix = (n: number, r: ERedix) : string => {
@@ -13,7 +17,7 @@ const toRedix = (n: number, r: ERedix) : string => {
             return "0x" + n.toString(16);
         case ERedix.BIN:
             return "0b" + n.toString(2);
-        case ERedix.DEC:
+        case ERedix.INT:
             return "" + n.toString(10);
     }
 }
@@ -40,10 +44,12 @@ const ValueBox : React.FC<IProps> = ({ n }) => {
             <div className="value-box">
                 <div onClick={() => {setShow(!show)}} className={`value ${classOpened}`}>{ toRedix(n, redix) }</div>
                 <div className={`select ${classClosed}`}>
-                    <div onClick={() => {onSelectRepr(ERedix.BIN)}} className="repr">Bin</div>
-                    <div onClick={() => {onSelectRepr(ERedix.HEX)}} className="repr">Hex</div>
-                    <div onClick={() => {onSelectRepr(ERedix.DEC)}} className="repr">Dec</div>
+                    <div onClick={() => {onSelectRepr(ERedix.BIN)}} className="repr">Bin (0b0)</div>
+                    <div onClick={() => {onSelectRepr(ERedix.HEX)}} className="repr">Hex (0x0)</div>
+                    <div onClick={() => {onSelectRepr(ERedix.INT)}} className="repr">Int</div>
+                    <div onClick={() => {onSelectRepr(ERedix.UINT)}} className="repr">Unsigned int</div>
                 </div>
+                <div className="value"></div>
             </div>
     );
 };
