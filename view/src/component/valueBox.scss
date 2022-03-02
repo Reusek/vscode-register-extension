@@ -1,31 +1,39 @@
+@import "../../sass/vars";
 .value-box {
     position: relative;
-    @apply bg-red-100;
     @apply select-none;
 
     .value {
         @apply p-1 text-center;
-        @apply border-2 border-transparent;
+        // @apply border-2 border-transparent;
         // @apply border-b-red-200;
         @apply cursor-pointer;
+        overflow: hidden;
+        @apply bg-gray-700;
+        // background-color: var(--vscode-button-background);
     }
 
     .value.opened {
-        @apply bg-red-300;
+        @apply bg-gray-600;
+        // background-color: var(--vscode-button-hover-background);
+        // @apply bg-red-300;
         // @apply border-red-400;
         // @apply border-2  border-red-400;
     }
 
     .value:hover {
-        @apply bg-red-300;
+        @apply bg-gray-600;
+        // background-color: var(--vscode-button-hover-background);
         // @apply border-red-400;
         // @apply border-2  border-red-400;
     }
 
     .select {
         // display: flex;
-        @apply bg-red-100;
-        @apply border-red-300;
+        @apply bg-gray-700;
+        // @apply border-red-300;
+        @apply border-gray-600;
+        // border-color: var(--vscode-button-hover-background);
         @apply border-2 border-t-0;
 
         top: 100%;
@@ -43,8 +51,8 @@
         }
 
         .repr:hover {
-            @apply bg-red-200;
-            @apply border-red-300;
+            border-color: var(--vscode-button-hover-background);
+            // @apply border-red-300;
             // @apply border-2  border-red-400;
         }
     }

@@ -5,14 +5,18 @@ export enum RegisterTypes {
 	I8,
 	I16,
 	I32,
-	F32
+	F32,
+	BITS,
+	HEX,
 }
 
 export class Register {
 	value: number;
+	bits: number;
 
-	constructor(raw: string) {
+	constructor(raw: string, bits: number) {
 		this.value = parseInt(raw, 16);
+		this.bits = bits;
 	}
 
 	private convertToUInt(n: number, len: number) : number {
@@ -78,28 +82,50 @@ export class Register {
 		return this.convertToFloat32(this.value);
 	}
 
+	public get bin() {
+		let v = this.value.toString(2);
+		return Register.separate("0".repeat(this.bits - v.length) + v, 4);
+	}
+
+	public get hex() {
+		let v = this.value.toString(16);
+		 return Register.separate("0".repeat(((this.bits / 4)) - v.length) + v, 4);
+	}
+
+	static separate(s: string, len: number) : string {
+		let ss = [];
+		for (let i = 0; i < s.length; i = i + len) {
+			ss.push(s.slice(i, i + len));
+		}
+		return ss.join("_");
+	}
+
 	/**
 	 * Decode value as `d` type.
 	 *
 	 * @param d Register type.
 	 * @returns Decoded value.
 	 */
-	public getDecoded(d: RegisterTypes) : number {
+	public getDecoded(d: RegisterTypes) : string {
 		switch (d) {
 			case RegisterTypes.U8:
-				return this.uint8_t;
+				return this.uint8_t.toString(10);
 			case RegisterTypes.U16:
-				return this.uint16_t;
+				return this.uint16_t.toString(10);
 			case RegisterTypes.U32:
-					return this.uint32_t;
+					return this.uint32_t.toString(10);
 			case RegisterTypes.I8:
-				return this.int8_t;
+				return this.int8_t.toString(10);
 			case RegisterTypes.I16:
-				return this.int16_t;
+				return this.int16_t.toString(10);
 			case RegisterTypes.I32:
-				return this.int32_t;
+				return this.int32_t.toString(10);
 			case RegisterTypes.F32:
-				return this.float32_t;
+				return this.float32_t.toString(10);
+			case RegisterTypes.BITS:
+				return this.bin;
+			case RegisterTypes.HEX:
+				return this.hex;
 		}
 	}
 }

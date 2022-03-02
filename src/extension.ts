@@ -22,7 +22,7 @@ class ColorsViewProvider implements vscode.WebviewViewProvider {
 	private testEvent(reg: IRegister[]) {
 		console.log("[TEST EVENT]", reg);
 		if (this._view) {
-			this._view.webview.postMessage({type: "test", data: reg});
+			this._view.webview.postMessage({type: "update", data: reg});
 			console.log("post");
 		}
 	}
@@ -76,32 +76,56 @@ class ColorsViewProvider implements vscode.WebviewViewProvider {
 
 	private _getHtmlForWebview(webview: vscode.Webview) {
 		// Get the local path to main script run in the webview, then convert it to a uri we can use in the webview.
-		const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'media', 'main.js'));
+		// const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'media', 'main.js'));
 
 		// Do the same for the stylesheet.
 		// const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css'));
 		// const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css'));
-		const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'media', 'main.css'));
+		// const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'media', 'main.css'));
 
 
 		// eslint-disable-next-line @typescript-eslint/no-var-requires
-		// const manifest = require(path.join(this._extensionUri.path, 'viewer', 'build', 'asset-manifest.json'));
-		// const mainScript = manifest["files"]['main.js'];
-		// console.log("[TEST] ", mainScript);
-		// const mainStyle = manifest["files"]['main.css'];
-		// console.log("[TEST] ", mainStyle);
+		const manifest = require(path.join(this._extensionUri.path, 'view', 'build', 'asset-manifest.json'));
+		const mainScript = manifest["files"]['main.js'];
+		console.log("[TEST] ", mainScript);
+		const mainStyle = manifest["files"]['main.css'];
+		console.log("[TEST] ", mainStyle);
 // 
-		// const scriptPathOnDisk = vscode.Uri.file(path.join(this._extensionUri.path, 'viewer', 'build', mainScript));
-		// const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
-		// const stylePathOnDisk = vscode.Uri.file(path.join(this._extensionUri.path, 'viewer', 'build', mainStyle));
-		// const styleUri = stylePathOnDisk.with({ scheme: 'vscode-resource' });
+		const scriptPathOnDisk = vscode.Uri.file(path.join(this._extensionUri.path, 'view', 'build', mainScript));
+		const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
+		console.log("TEST -- ", scriptUri);
+		const stylePathOnDisk = vscode.Uri.file(path.join(this._extensionUri.path, 'view', 'build', mainStyle));
+		const styleUri = stylePathOnDisk.with({ scheme: 'vscode-resource' });
+		console.log("TEST -- ", styleUri);
 
 		// Use a nonce to only allow a specific script to be run.
 		const nonce = getNonce();
 
 		console.log("[NONCE IDK]", nonce);
 
-		return `<!DOCTYPE html>
+		return `
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
+			<meta name="theme-color" content="#000000" />
+			<meta
+			name="description"
+			content="Web site created using create-react-app"
+			/>
+			<link rel="stylesheet" type="text/css" href="${styleUri}">
+			<title>React App</title>
+		</head>
+		<body>
+			<noscript>You need to enable JavaScript to run this app.</noscript>
+			<div id="root">test</div>
+			<script nonce="${nonce}" src="${scriptUri}"></script>
+		</body>
+		</html>
+		`;
+
+		/* return `<!DOCTYPE html>
 			<html lang="en">
 			<head>
 				<meta charset="utf-8">
@@ -338,7 +362,7 @@ class ColorsViewProvider implements vscode.WebviewViewProvider {
 
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</body>
-			</html>`;
+			</html>`; */
 	}
 }
 

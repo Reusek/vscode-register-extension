@@ -1,4 +1,28 @@
+@import "../../sass/vars";
 .reg {
-    width: 300px;
-    @apply bg-gray-500;
+    @apply py-4;
+    @apply px-2;
+    // padding: 10px;
+    width: 100%;
+    // height: 100vh;
+    // @apply bg-gray-500;
+    @apply border-b-2;
+    @apply border-gray-600;
+
+    &:nth-child(2n - 1) {
+        // @apply bg-gray-00
+    }
+
+    .item {
+        @apply pb-1;
+    }
+}
+
+.more {
+    @apply underline;
+    @apply cursor-pointer;
+}
+
+.regex {
+    
 }
